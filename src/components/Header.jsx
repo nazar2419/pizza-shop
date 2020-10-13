@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button';
-import logoSvg from './assets/img/pizza-logo.svg';
+import logoSvg from '../assets/img/pizza-logo.svg';
 const Header = () => {
   const click = () => {
     console.log('Hello');
@@ -16,7 +16,7 @@ const Header = () => {
           </div>
         </div>
         <div className="header__cart">
-        <Button className='button--cart' onCLick={click}> 
+        <Button outline className='button--cart ' onCLick={click}> 
           <span> 555 ₽</span>
           <div className="button__delimiter"></div>
           <svg
