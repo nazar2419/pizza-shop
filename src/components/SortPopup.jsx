@@ -3,11 +3,11 @@ import React, {useState, useEffect, useRef} from 'react';
 function SortPopup({ items }) {
   const [visiblePopup, setVisiblePopup] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
-  const activeLabel = items[activeItem];
-  let item = items.map((name,index) => {
+  const activeLabel = items[activeItem].name;
+  let item = items.map((obj,index) => {
     return  <li  className={activeItem === index ? 'active' : ''} 
-    onClick={() => setActiveItem(index)} 
-    key={`${index}_${name}`}>{name}</li> 
+    onClick={() => onSelectItem(index)} 
+    key={`${index}_${obj.type}`}>{obj.name}</li> 
   })
   const sortRef = useRef();
 

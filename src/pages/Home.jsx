@@ -11,7 +11,11 @@ function Home({ items }) {
         'Закрытые'
       ];
     
-      const itemsSort = ['популярности','цене', 'алфавит']
+      const itemsSort = [
+          {name: 'популярности', type: 'popular'},
+          {name: 'цене', type: 'price'},
+          {name: 'алфавит', type: 'alphabet'},
+      ];
     
       function selectCategory(name) {
         return console.log(name);
