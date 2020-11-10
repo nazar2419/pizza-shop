@@ -1,6 +1,8 @@
- import React, { useState } from 'react';
- import PropTypes from 'prop-types';
- import classNames from 'classnames'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames'
+
+
 
  function PizzaBlock({name, imageUrl, price, types, sizes}) {
      const availableTypes = ['тонкое', 'традиционное'];
@@ -15,6 +17,8 @@
      const onSelectSize = (index) => {
         setActiveSize(index);
     }
+
+    
      return (
         <div className="pizza-block">
         <img
@@ -84,7 +88,7 @@
      imageUrl: PropTypes.string.isRequired,
      price: PropTypes.number.isRequired,
      types: PropTypes.arrayOf(PropTypes.number).isRequired,
-     
+     sizes: PropTypes.arrayOf(PropTypes.number),
  };
 
  PizzaBlock.defaultProps = {
@@ -95,7 +99,4 @@
  };
  
  export default PizzaBlock
- 
- 
- 
  
