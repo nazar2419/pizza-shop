@@ -3,6 +3,8 @@ import {Categories, SortPopup, PizzaBlock, PizzaLoadingBlock} from '../component
 import { useSelector, useDispatch} from 'react-redux';
 import { setCategory, setSortBy } from '../redux/actions/filters';
 import { fetchPizzas } from '../redux/actions/pizzas';
+import { addPizzaToCart } from '../redux/actions/cart';
+
 
 const  itemsArray = [
   'Мясные',
@@ -25,13 +27,21 @@ function Home() {
        dispatch(setCategory(index));
      }, [dispatch]);
 
-     const onSelectSortType = useCallback((type) => {
-        dispatch(setSortBy(type));
-      }, [dispatch]);
+  const onSelectSortType = useCallback((type) => {
+      dispatch(setSortBy(type));
+    }, [dispatch]);
 
-    const items = useSelector(({ pizzas }) => pizzas.items);
-    const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
-    const { category, sortBy } = useSelector(({ filters }) => filters); 
+  const handleAddPizzaToCart = (obj) => {
+     dispatch({
+       type: 'ADD_PIZZA_CART',
+       payload: obj,
+     });
+  };
+
+  const items = useSelector(({ pizzas }) => pizzas.items);
+  const cartItems = useSelector(({ cart }) => cart.items);
+  const isLoaded = useSelector(({ pizzas }) => pizzas.isLoaded);
+  const { category, sortBy } = useSelector(({ filters }) => filters); 
 
     useEffect(() => {
         dispatch(fetchPizzas(sortBy, category,));
@@ -50,7 +60,13 @@ function Home() {
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
                 {isLoaded 
-                    ? items.map((obj)=> <PizzaBlock key={obj.id} isLoading={true} {...obj} /> )
+                    ? items.map((obj)=> (
+                      <PizzaBlock 
+                        onClickAddPizza={handleAddPizzaToCart} 
+                        key={obj.id} 
+                        addCount = {cartItems[obj.id] && cartItems[obj.id].length}
+                        isLoading={true}
+                         {...obj} /> ))
                     : Array(12)
                     .fill(0)
                     .map((_, index) => <PizzaLoadingBlock key={index} />)}
