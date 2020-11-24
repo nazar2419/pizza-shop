@@ -64,7 +64,7 @@ function Home() {
                       <PizzaBlock 
                         onClickAddPizza={handleAddPizzaToCart} 
                         key={obj.id} 
-                        addCount = {cartItems[obj.id] && cartItems[obj.id].length}
+                        addCount = {cartItems[obj.id] && cartItems[obj.id].items.length}
                         isLoading={true}
                          {...obj} /> ))
                     : Array(12)
